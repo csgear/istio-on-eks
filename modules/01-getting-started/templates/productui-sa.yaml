@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: ServiceAccount
 metadata:
-  name: productcatalog-sa
+  name: productui-sa
   namespace: {{ .Release.Namespace }}
   labels:
-    account: productcatalog
+    account: productui

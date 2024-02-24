@@ -5,13 +5,9 @@ const app = express()
 const path = require("path");
 const Prometheus = require('prom-client')
 
-var XRay = require('aws-xray-sdk');
-var AWS = XRay.captureAWS(require('aws-sdk'));
-XRay.captureHTTPsGlobal(require('http'));
 var http = require('http');
 
 app.use(bodyParser.urlencoded({extended: false}));
-app.use(XRay.express.openSegment('Frontend'));
 
 Prometheus.collectDefaultMetrics();
 
@@ -32,8 +28,6 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use(bodyParser.urlencoded({extended: true}))
 
 app.get('/', (req, res) => {
-    var seg = XRay.getSegment();
-    seg.addAnnotation('service', 'prodcatalog-request');
     let query = req.query.queryStr;
 
     const requestOne = axios.get(baseProductUrl);
@@ -83,8 +77,6 @@ app.get('/metrics', (req, res, next) => {
   res.end(Prometheus.register.metrics())
 })
 
-
-app.use(XRay.express.closeSegment());
 
 app.listen(9000, function() {
       console.log('listening on 9000')

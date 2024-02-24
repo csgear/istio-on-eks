@@ -3,15 +3,10 @@
 
 var express = require("express");
 var app = express();
-var XRay = require('aws-xray-sdk');
-var AWS = XRay.captureAWS(require('aws-sdk'));
-XRay.captureHTTPsGlobal(require('http'));
 var http = require('http');
 var os = require("os");
 
 var responseStatus = 200;
-
-app.use(XRay.express.openSegment('Product-Detail'));
 
 app.get("/catalogDetail", (req, res, next) => {
     res.status(responseStatus)
@@ -50,7 +45,6 @@ app.get("/resetFault", (req, res, next) => {
    res.json("Removed fault injection from host: " + os.hostname());
 });
 
-app.use(XRay.express.closeSegment());
 
 app.listen(3000, () => {
  console.log("Server running on port 3000");

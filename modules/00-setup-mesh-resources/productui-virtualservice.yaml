@@ -1,17 +1,17 @@
 apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
 metadata:
-  name: frontend
+  name: productui
   namespace: workshop
 spec:
   hosts:
-  - frontend
+  - productui
   http:
   - match:
     - uri:
         prefix: /
     route:
     - destination:
-        host: frontend
+        host: productui
         port:
           number: 9000

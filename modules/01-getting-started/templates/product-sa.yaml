@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: ServiceAccount
 metadata:
-  name: frontend-sa
+  name: product-sa
   namespace: {{ .Release.Namespace }}
   labels:
-    account: frontend
+    account: product

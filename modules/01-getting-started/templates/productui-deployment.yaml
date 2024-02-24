@@ -1,13 +1,13 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: frontend
+  name: productui
   namespace: {{ .Release.Namespace }}
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: frontend
+      app: productui
       version: v1
   template:
     metadata:
@@ -15,12 +15,12 @@ spec:
         prometheus.io/scrape: 'true'
         prometheus.io/path: '/stats/prometheus'
       labels:
-        app: frontend
+        app: productui
         version: v1
     spec:
       serviceAccountName: frontend-sa
       containers:
-        - name: frontend
+        - name: product
           image: "{{ .Values.frontend.image.repository }}:{{ .Values.frontend.image.tag }}"
           imagePullPolicy: Always
           livenessProbe:
@@ -37,6 +37,6 @@ spec:
               port: 9000
             successThreshold: 3
           env:
-            {{ .Values.frontend.env | toYaml | nindent 12 }}
+            {{ .Values.product.env | toYaml | nindent 12 }}
           ports:
             - containerPort: 9000
