@@ -14,6 +14,7 @@ observability in the modern distributed application landscape.
 This repository, organized in modules, will guide you step-by-step in setting 
 Istio on EKS and working with the most commonly observed service-mesh use cases.
 
+
 ## 🧱 Modules 
 
 ### [1. Getting Started](modules/01-getting-started/README.md)
