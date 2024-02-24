@@ -15,8 +15,8 @@ app.get("/catalogDetail", (req, res, next) => {
     if (responseStatus == 200) {
         console.log("Catalog Detail Get Request Successful");
         res.json({
-                 "version":"1",
-                 "vendors":[ "ABC.com" ]
+                 "version":"2",
+                 "vendors":[ "Entrust.com", "Microsoft.com" ]
                   } )
     } else {
         console.log("Catalog Detail Get Request has error 500");
