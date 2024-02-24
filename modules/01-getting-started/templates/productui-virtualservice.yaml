@@ -1,0 +1,17 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: productui
+  namespace: workshop
+spec:
+  hosts:
+  - productui
+  http:
+  - match:
+    - uri:
+        prefix: /
+    route:
+    - destination:
+        host: productui
+        port:
+          number: 9000

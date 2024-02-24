@@ -1,33 +1,46 @@
-# Istio on EKS
+# Istio on Minikube
 
 Run your containerized workloads and microservices as part of a service-mesh 
-with Istio on EKS! 🚀 
-
-Istio plays a crucial role in enhancing and simplifying microservices-based 
-application architectures by providing a powerful and comprehensive service mesh 
-solution. Istio abstracts away many of the networking and security complexities 
-in microservices-based applications, allowing developers to focus on business 
-logic and application functionality. It provides a unified and robust platform 
-for managing microservices at scale, improving reliability, security, and 
-observability in the modern distributed application landscape. 
-
-This repository, organized in modules, will guide you step-by-step in setting 
-Istio on EKS and working with the most commonly observed service-mesh use cases.
 
 
-## 🧱 Modules 
+## Prepare istio environment
 
-### [1. Getting Started](modules/01-getting-started/README.md)
-### [2. Traffic Management](modules/02-traffic-management/README.md)
-### [3. Network Resiliency](modules/03-network-resiliency/README.md)
+### get istio version - 1.20.3 - release # 1.20
 
-## 🔐 Security
-See [CONTRIBUTING](CONTRIBUTING.md#security-issue-notifications) for more information.
+```shell
+istioctl proxy-status
+```
 
-## 💼 License
-This library is licensed under the Apache 2.0 License.
+### install addons
 
-## 🙌 Community
-We welcome all individuals who are enthusiastic about data on Kubernetes to become a part of this open source community. Your contributions and participation are invaluable to the success of this project.
+```shell
+for ADDON in kiali jaeger prometheus grafana 
+do 
+   ADDON_URL="https://raw.githubusercontent.com/istio/istio/release-1.20/samples/addons/$ADDON.yaml" 
+   kubectl apply -f $ADDON_URL
+done
+```
 
-Built with ❤️ at AWS.
+### verify addons
+
+```shell
+kubectl port-forward svc/grafana 3000:3000 -n istio-system
+
+# http://localhost:3000/dashboards
+
+kubectl port-forward svc/kiali 20001:20001 -n istio-system
+
+# http://localhost:20001
+
+```
+
+### install application
+
+```shell
+kubectl create namespace workshop
+kubectl label namespace workshop istio-injection=enabled
+
+helm install mesh-basic . -n workshop
+
+helm uninstall mesh-basic -n workshop
+```
