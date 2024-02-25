@@ -44,3 +44,16 @@ helm install mesh-basic . -n workshop
 
 helm uninstall mesh-basic -n workshop
 ```
+
+
+### Deepdive proxy
+
+```shell
+istioctl proxy-config cluster -n istio-system istio-ingressgateway-5fc67fbd74-xl7pk
+
+kubectl get svc istio-ingressgateway -n istio-system -o jsonpath='{.status.loadBalancer.ingress[*].ip}'
+
+ISTIO_INGRESS_URL=$(kubectl get svc istio-ingressgateway -n istio-system -o jsonpath='{.status.loadBalancer.ingress[*].ip}')
+
+siege http://hytrust.com -c 5 -d 10 -t 1M
+```
