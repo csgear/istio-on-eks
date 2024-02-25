@@ -8,6 +8,9 @@ var os = require("os");
 var responseStatus = 200;
 
 app.get("/catalogDetail", (req, res, next) => {
+    let tenant_id = req.header('x-tenant') ?? 'tpm'
+    console.log("Product ui received headers: ", tenant_id);
+  
     res.status(responseStatus)
     if (responseStatus == 200) {
         console.log("Catalog Detail Get Request Successful");

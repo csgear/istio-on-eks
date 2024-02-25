@@ -18,10 +18,10 @@ spec:
         app: productui
         version: v1
     spec:
-      serviceAccountName: frontend-sa
+      serviceAccountName: productui-sa
       containers:
         - name: product
-          image: "{{ .Values.frontend.image.repository }}:{{ .Values.frontend.image.tag }}"
+          image: "{{ .Values.productui.image.repository }}:{{ .Values.productui.image.tag }}"
           imagePullPolicy: Always
           livenessProbe:
             httpGet:
@@ -37,6 +37,6 @@ spec:
               port: 9000
             successThreshold: 3
           env:
-            {{ .Values.product.env | toYaml | nindent 12 }}
+            {{ .Values.productui.env | toYaml | nindent 12 }}
           ports:
             - containerPort: 9000

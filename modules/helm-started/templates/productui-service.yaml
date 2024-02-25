@@ -4,14 +4,14 @@ metadata:
   #annotations:
   # This annotation is only required if you are creating an internal facing ELB. Remove this annotation to create public facing ELB.
   #service.beta.kubernetes.io/aws-load-balancer-internal: "true"
-  name: product
+  name: productui
   namespace: {{ .Release.Namespace }}
   labels:
-    app: product
+    app: productui
 spec:
   ports:
     - name: "http"
       port: 9000
       targetPort: 9000
   selector:
-    app: product
+    app: productui
