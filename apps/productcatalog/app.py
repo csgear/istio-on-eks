@@ -63,7 +63,13 @@ class Products(Resource):
         """
         try:
             flask_app.logger.info('AGG_APP_URL is ' + str(AGG_APP_URL))
-            response = requests.get(str(AGG_APP_URL))
+            
+            tenant_id = request.headers.get('x-tenant')
+            flask_app.logger.info('Get tenant id from get request: ' + tenant_id)
+            # pass the x-tenant header 
+            response = requests.get(str(AGG_APP_URL), headers={
+                'x-tenant': tenant_id
+            })
             content = response.json()
             flask_app.logger.info('Get-All Request succeeded')
             return {
