@@ -24,11 +24,11 @@ done
 ### verify addons
 
 ```shell
-kubectl port-forward svc/grafana 3000:3000 -n istio-system
+kubectl port-forward --address 0.0.0.0 svc/grafana 3000:3000 -n istio-system
 
 # http://localhost:3000/dashboards
 
-kubectl port-forward svc/kiali 20001:20001 -n istio-system
+kubectl port-forward --address 0.0.0.0 svc/kiali 20001:20001 -n istio-system
 
 # http://localhost:20001
 
@@ -57,3 +57,6 @@ ISTIO_INGRESS_URL=$(kubectl get svc istio-ingressgateway -n istio-system -o json
 
 siege http://hytrust.com -c 5 -d 10 -t 1M
 ```
+
+
+### 

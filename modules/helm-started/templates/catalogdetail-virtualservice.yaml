@@ -7,8 +7,19 @@ spec:
   hosts:
   - catalogdetail
   http:
+  - match:
+    - headers:
+        x-tenant:
+          exact: test-user
+    route:
+    - destination:
+        host: catalogdetail
+        port:
+          number: 3000
+        subset: v2
   - route:
     - destination:
         host: catalogdetail
         port:
           number: 3000
+        subset: v1
