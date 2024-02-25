@@ -55,8 +55,19 @@ kubectl get svc istio-ingressgateway -n istio-system -o jsonpath='{.status.loadB
 
 ISTIO_INGRESS_URL=$(kubectl get svc istio-ingressgateway -n istio-system -o jsonpath='{.status.loadBalancer.ingress[*].ip}')
 
-siege http://hytrust.com -c 5 -d 10 -t 1M
 ```
 
 
-### 
+### Test internal traffic
+
+```shell
+for i in `seq 1 20`
+   do curl http://catalogdetail/catalogdetail/ -s -H "x-tenant: test-user"
+done
+
+
+for i in `seq 1 20`
+   do curl http://catalogdetail/catalogdetail/ -s -H "x-tenant: tpm"
+done
+
+```

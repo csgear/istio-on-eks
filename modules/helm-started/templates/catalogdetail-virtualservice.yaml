@@ -15,11 +15,11 @@ spec:
     - destination:
         host: catalogdetail
         port:
-          number: 3000
+          number: 80
         subset: v2
   - route:
     - destination:
         host: catalogdetail
         port:
-          number: 3000
+          number: 80
         subset: v1

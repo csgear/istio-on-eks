@@ -18,7 +18,7 @@ productcatalog:
     tag: "1.0"
   env:
     - name: AGG_APP_URL
-      value: "http://catalogdetail.workshop.svc.cluster.local:3000/catalogDetail"
+      value: "http://catalogdetail.workshop.svc.cluster.local/catalogDetail"
 
 productui:
   image:
@@ -26,4 +26,4 @@ productui:
     tag: "1.0"
   env:
     - name: BASE_URL
-      value: "http://productcatalog.workshop.svc.cluster.local:5000/products/"
+      value: "http://productcatalog.workshop.svc.cluster.local/products/"
